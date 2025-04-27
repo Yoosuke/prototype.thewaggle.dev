@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>最速・最小コストで、あなたのアイデアが動き出す。</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        .hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #3B82F6 0%, #6366F1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .process-arrow::after {
+            content: '▶';
+            position: absolute;
+            right: -1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #3B82F6;
+        }
+        @media (max-width: 768px) {
+            .process-arrow::after {
+                content: '▼';
+                position: absolute;
+                bottom: -1.5rem;
+                left: 50%;
+                right: auto;
+                top: auto;
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800">
+    <!-- ヒーローセクション -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center px-4 py-20 overflow-hidden">
+        <div id="canvas-container" class="hero-canvas"></div>
+        <div class="container mx-auto text-center z-10">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                最速・最小コストで、<br class="hidden md:block">
+                <span class="gradient-text">あなたのアイデアが動き出す。</span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto">
+                スクール生×プロトタイピング支援で、<br class="hidden md:block">リスクゼロから新規事業をスタート。
+            </p>
+            <a href="#contact" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg text-lg md:text-xl shadow-lg transform transition hover:scale-105">
+                今すぐ無料で案件相談
+            </a>
+        </div>
+    </section>
+
+    <!-- 課題提起セクション -->
+    <section id="problems" class="py-20 bg-gray-50 px-4">
+        <div class="container mx-auto max-w-5xl">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">こんな<span class="text-blue-600">課題</span>を抱えていませんか？</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow-md">
+                    <div class="text-4xl text-blue-600 mb-4">01</div>
+                    <h3 class="text-xl font-bold mb-4">リソース不足</h3>
+                    <p>新しいアイデアはあるのに、それを形にする人材や時間がない。社内エンジニアは既存業務で手一杯。</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-md">
+                    <div class="text-4xl text-blue-600 mb-4">02</div>
+                    <h3 class="text-xl font-bold mb-4">コスト過多</h3>
+                    <p>外部発注すると高額な費用がかかり、検証段階の企画にはリスクが大きすぎる。</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-md">
+                    <div class="text-4xl text-blue-600 mb-4">03</div>
+                    <h3 class="text-xl font-bold mb-4">スピード感不足</h3>
+                    <p>通常の開発工程では時間がかかりすぎて、市場投入のタイミングを逃してしまう。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- サービス説明セクション -->
+    <section id="service" class="py-20 px-4">
+        <div class="container mx-auto max-w-5xl">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-6">
+                <span class="gradient-text">スクール生</span>による<br class="md:hidden">
+                プロトタイプ開発支援サービス
+            </h2>
+            <p class="text-center text-xl mb-16 max-w-3xl mx-auto">
+                アイデア段階のものを最小コストで素早く形にし、<br class="hidden md:block">
+                ビジネスの可能性を広げます。
+            </p>
+            
+            <div class="grid md:grid-cols-3 gap-10 mb-16">
+                <div class="text-center">
+                    <div class="bg-blue-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">スクール生が開発</h3>
+                    <p>実践的なスキルを持つスクール生が、あなたのアイデアをプロトタイプとして形にします。</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-blue-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">成果物確認後に支払い</h3>
+                    <p>完成したプロトタイプを確認してから報酬を支払うため、リスクなく導入できます。</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-blue-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">運営によるサポート</h3>
+                    <p>スクール運営チームが品質管理とプロセスサポートを行い、成果物の品質を担保します。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- スクール紹介と実例紹介 -->
+    <section id="about-school" class="py-20 px-4">
+        <div class="container mx-auto max-w-5xl">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-10">
+            スクールについて
+        </h2>
+        <p class="text-center text-lg mb-6 max-w-3xl mx-auto">
+            本サービスは、<a href="https://thewaggle.dev" class="text-blue-600 underline hover:text-blue-800" target="_blank">The Waggle</a> による実践型ITスクールで学ぶ受講生たちが、実案件を通じてスキルを磨きながらプロトタイプ開発に挑戦する仕組みです。
+            <br>「最速でアイデアを形にする」「実践から成長する」をコンセプトにしています。
+        </p>
+    
+        <div class="text-center mt-10">
+            <h3 class="text-2xl font-bold mb-4">
+            スクール生が制作するプロジェクト例
+            </h3>
+            <a href="https://route.thewaggle.dev" target="_blank" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg text-lg shadow-lg transform transition hover:scale-105">
+            Route Optimization Web App
+            </a>
+            <p class="mt-4 text-sm text-gray-600">
+            （訪問ルート最適化システム）  
+            </p>
+        </div>
+        </div>
+    </section>
+  
+
+    <!-- サービスの流れ -->
+    <section id="process" class="py-20 bg-gray-50 px-4">
+        <div class="container mx-auto max-w-5xl">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">サービス利用の<span class="text-blue-600">流れ</span></h2>
+            
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+                <div class="relative flex-1 text-center mb-16 md:mb-0 process-arrow md:last:process-arrow-none">
+                    <div class="bg-blue-600 text-white rounded-full w-14 h-14 flex items-center justify-center mx-auto mb-4">1</div>
+                    <h3 class="text-lg font-bold mb-2">案件投稿</h3>
+                    <p class="text-sm">開発したいプロトタイプの内容を簡単に投稿</p>
+                </div>
+                
+                <div class="relative flex-1 text-center mb-16 md:mb-0 process-arrow md:last:process-arrow-none">
+                    <div class="bg-blue-600 text-white rounded-full w-14 h-14 flex items-center justify-center mx-auto mb-4">2</div>
+                    <h3 class="text-lg font-bold mb-2">ブラッシュアップ</h3>
+                    <p class="text-sm">運営チームが要件をブラッシュアップ</p>
+                </div>
+                
+                <div class="relative flex-1 text-center mb-16 md:mb-0 process-arrow md:last:process-arrow-none">
+                    <div class="bg-blue-600 text-white rounded-full w-14 h-14 flex items-center justify-center mx-auto mb-4">3</div>
+                    <h3 class="text-lg font-bold mb-2">開発チャレンジ</h3>
+                    <p class="text-sm">スクール生がプロトタイプ開発に挑戦</p>
+                </div>
+                
+                <div class="relative flex-1 text-center mb-16 md:mb-0 process-arrow md:last:process-arrow-none">
+                    <div class="bg-blue-600 text-white rounded-full w-14 h-14 flex items-center justify-center mx-auto mb-4">4</div>
+                    <h3 class="text-lg font-bold mb-2">納品</h3>
+                    <p class="text-sm">成果物を確認していただきます</p>
+                </div>
+                
+                <div class="relative flex-1 text-center">
+                    <div class="bg-blue-600 text-white rounded-full w-14 h-14 flex items-center justify-center mx-auto mb-4">5</div>
+                    <h3 class="text-lg font-bold mb-2">報酬支払い</h3>
+                    <p class="text-sm">成果物に満足したら報酬を支払い</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ベネフィットリスト -->
+    <section id="benefits" class="py-20 px-4">
+        <div class="container mx-auto max-w-5xl">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">
+                導入する<span class="text-blue-600">メリット</span>
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-10">
+                <div class="bg-white p-8 rounded-lg shadow-md border-l-4 border-blue-600">
+                    <h3 class="text-xl font-bold mb-4">成果物を見てから支払う安心感</h3>
+                    <p>完成したプロトタイプを実際に確認してから報酬を支払うため、品質に満足してからの支払いが可能です。不満足な場合は支払い不要なので、リスクゼロで導入できます。</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-lg shadow-md border-l-4 border-blue-600">
+                    <h3 class="text-xl font-bold mb-4">成果物の自由なPR利用</h3>
+                    <p>開発されたプロトタイプは、社内プレゼンや投資家向けピッチなど、さまざまな場面で自由に利用可能。アイデアの説得力を高め、事業化への道を開きます。</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-lg shadow-md border-l-4 border-blue-600">
+                    <h3 class="text-xl font-bold mb-4">スクール生の成長支援</h3>
+                    <p>実案件への挑戦機会を提供することで、次世代のIT人材育成に貢献。社会貢献と事業推進を同時に実現できます。</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-lg shadow-md border-l-4 border-blue-600">
+                    <h3 class="text-xl font-bold mb-4">最小コストでの検証</h3>
+                    <p>通常の開発費と比較して大幅に低コストで開発できるため、複数のアイデアを並行して検証することも可能です。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- CTA -->
+    <section id="contact" class="py-20 bg-blue-600 text-white px-4">
+        <div class="container mx-auto max-w-4xl text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">今すぐ、あなたのアイデアを形にしませんか？</h2>
+            <p class="text-xl mb-10 max-w-2xl mx-auto">
+                まずは無料相談から。あなたのビジネスアイデアをプロトタイプとして形にする第一歩を踏み出しましょう。
+            </p>
+            <a href="#" class="inline-block bg-white text-blue-600 font-bold py-4 px-8 rounded-lg text-lg md:text-xl shadow-lg transform transition hover:scale-105 hover:bg-gray-100">
+                無料で案件相談する
+            </a>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="py-10 bg-gray-800 text-white text-center px-4">
+        <div class="container mx-auto">
+            <p>&copy; 2025 プロトタイプ開発支援サービス All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- p5.js スクリプト -->
+    <script>
+        function sketch(p) {
+            let particles = [];
+            
+            p.setup = function() {
+                let canvas = p.createCanvas(p.windowWidth, p.windowHeight);
+                canvas.parent('canvas-container');
+                
+                // パーティクル生成
+                for (let i = 0; i < 50; i++) {
+                    particles.push(new Particle());
+                }
+            };
+            
+            p.draw = function() {
+                p.clear();
+                
+                // パーティクル描画と更新
+                for (let i = 0; i < particles.length; i++) {
+                    particles[i].update();
+                    particles[i].display();
+                    
+                    // 線を引く
+                    for (let j = i + 1; j < particles.length; j++) {
+                        let d = p.dist(particles[i].pos.x, particles[i].pos.y, 
+                                      particles[j].pos.x, particles[j].pos.y);
+                        if (d < 150) {
+                            p.stroke(59, 130, 246, p.map(d, 0, 150, 100, 0));
+                            p.line(particles[i].pos.x, particles[i].pos.y, 
+                                  particles[j].pos.x, particles[j].pos.y);
+                        }
+                    }
+                }
+            };
+            
+            p.windowResized = function() {
+                p.resizeCanvas(p.windowWidth, p.windowHeight);
+            };
+            
+            class Particle {
+                constructor() {
+                    this.pos = p.createVector(p.random(p.width), p.random(p.height));
+                    this.vel = p.createVector(p.random(-0.5, 0.5), p.random(-0.5, 0.5));
+                    this.size = p.random(3, 8);
+                    this.color = p.color(59, 130, 246, p.random(100, 200));
+                }
+                
+                update() {
+                    this.pos.add(this.vel);
+                    
+                    // 画面からはみ出たら反対側から出てくる
+                    if (this.pos.x < 0) this.pos.x = p.width;
+                    if (this.pos.x > p.width) this.pos.x = 0;
+                    if (this.pos.y < 0) this.pos.y = p.height;
+                    if (this.pos.y > p.height) this.pos.y = 0;
+                }
+                
+                display() {
+                    p.noStroke();
+                    p.fill(this.color);
+                    p.circle(this.pos.x, this.pos.y, this.size);
+                }
+            }
+        }
+        
+        new p5(sketch);
+    </script>
+</body>
+</html>
