@@ -1,0 +1,69 @@
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+}
+.hero-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+.gradient-text {
+    background: linear-gradient(90deg, #3B82F6 0%, #6366F1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+/* PC版（デフォルト） */
+.process-container {
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+text-align: center;
+}
+
+.process-step {
+position: relative;
+flex: 1;
+padding: 1rem;
+}
+
+.process-step::after {
+content: '▶';
+position: absolute;
+right: -1rem;
+top: 50%;
+transform: translateY(-50%);
+color: #3B82F6;
+font-size: 1.5rem;
+}
+
+/* 最後のステップの▶矢印は消す */
+.process-step:last-child::after {
+content: '';
+}
+
+/* スマホ版 */
+@media (max-width: 1024px) {
+    .process-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .process-step {
+        width: 100%;
+        margin-bottom: 2rem;
+        padding: 0;
+    }
+
+    .process-step::after {
+        display: none;
+    }
+
+    .process-step div,
+    .process-step h3,
+    .process-step p {
+        text-align: center;
+    }
+}
